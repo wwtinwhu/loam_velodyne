@@ -37,7 +37,9 @@ roslaunch velodyne_pointcloud VLP16_points.launch pcap:="$HOME/Downloads/velodyn
 
 ## Save Global Map
 When the slam mission is done or the bag is played over, you can use following order to save the global map
+```
 rosbag play senMapOrder.bag --clock
+```
 Specific Code is in the LaserMapping::mapOrderHandeler
 
 ## Troubleshooting
