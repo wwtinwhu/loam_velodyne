@@ -172,6 +172,9 @@ bool LaserMapping::setup(ros::NodeHandle& node, ros::NodeHandle& privateNode)
    // subscribe to IMU topic
    _subImu = node.subscribe<sensor_msgs::Imu>("/imu/data", 50, &LaserMapping::imuHandler, this);
 
+   //weitong
+   _subMapOrder = node.subscribe<std_msgs::String>("/map_order",100, &LaserMapping::mapOrderHandler, this);
+
    return true;
 }
 
@@ -224,6 +227,14 @@ void LaserMapping::imuHandler(const sensor_msgs::Imu::ConstPtr& imuIn)
    tf::quaternionMsgToTF(imuIn->orientation, orientation);
    tf::Matrix3x3(orientation).getRPY(roll, pitch, yaw);
    updateIMU({ fromROSTime(imuIn->header.stamp) , roll, pitch });
+}
+
+//weitong
+void LaserMapping::mapOrderHandler(const std_msgs::String::ConstPtr& order)
+{
+   ROS_INFO("copy that,save the global map");
+   pcl::io::savePCDFileASCII("/home/weitong/slam/globalmap.pcd",laserCLoudGlobalMap());
+   ROS_INFO("done");
 }
 
 void LaserMapping::spin()
@@ -281,6 +292,9 @@ void LaserMapping::publishResult()
 
    // publish transformed full resolution input cloud
    publishCloudMsg(_pubLaserCloudFullRes, laserCloud(), _timeLaserOdometry, "/camera_init");
+
+   //weitong 全局地图叠加
+   laserCLoudGlobalMap() += laserCloud();
 
    // publish odometry after mapped transformations
    geometry_msgs::Quaternion geoQuat = tf::createQuaternionMsgFromRollPitchYaw

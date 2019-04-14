@@ -88,6 +88,8 @@ public:
    auto& laserCloud() { return *_laserCloudFullRes; }
    auto& laserCloudCornerLast() { return *_laserCloudCornerLast; }
    auto& laserCloudSurfLast() { return *_laserCloudSurfLast; }
+   //weitong
+   auto& laserCLoudGlobalMap() {return *_laserCloudFullResGlobalMap;}
 
    void setScanPeriod(float val) { _scanPeriod = val; }
    void setMaxIterations(size_t val) { _maxIterations = val; }
@@ -130,7 +132,7 @@ private:
    Time _laserOdometryTime;
 
    float _scanPeriod;          ///< time per scan
-   const int _stackFrameNum;
+   const int _stackFrameNum;  //每隔stackFrameNum进行map
    const int _mapFrameNum;
    long _frameCount;
    long _mapFrameCount;
@@ -181,6 +183,9 @@ private:
    pcl::VoxelGrid<pcl::PointXYZI> _downSizeFilterMap;      ///< voxel filter for down sizing accumulated map
 
    bool _downsizedMapCreated = false;
+
+   //weitong
+   pcl::PointCloud<pcl::PointXYZI>::Ptr _laserCloudFullResGlobalMap; //全局地图
 };
 
 } // end namespace loam

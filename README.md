@@ -35,6 +35,11 @@ Or read from velodyne [VLP16 sample pcap](https://midas3.kitware.com/midas/folde
 roslaunch velodyne_pointcloud VLP16_points.launch pcap:="$HOME/Downloads/velodyne.pcap"
 ```
 
+## Save Global Map
+When the slam mission is done or the bag is played over, you can use following order to save the global map
+rosbag play senMapOrder.bag --clock
+Specific Code is in the LaserMapping::mapOrderHandeler
+
 ## Troubleshooting
 
 ### `multiScanRegistration` crashes right after playing bag file

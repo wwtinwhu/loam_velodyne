@@ -44,6 +44,9 @@
 #include <tf/transform_datatypes.h>
 #include <tf/transform_broadcaster.h>
 
+//weitong
+#include <std_msgs/String.h>
+
 
 
 namespace loam
@@ -67,6 +70,13 @@ public:
     *
     * @param cornerPointsLastMsg the new last corner cloud message
     */
+
+   //weitong
+   void mapOrderHandler(const std_msgs::String::ConstPtr& order);
+    /** \brief Handler method for saving Global Map
+  *
+  * @param order just the order
+  */
    void laserCloudCornerLastHandler(const sensor_msgs::PointCloud2ConstPtr& cornerPointsLastMsg);
 
    /** \brief Handler method for a new last surface cloud.
@@ -135,6 +145,8 @@ private:
    ros::Subscriber _subLaserCloudFullRes;      ///< full resolution cloud message subscriber
    ros::Subscriber _subLaserOdometry;          ///< laser odometry message subscriber
    ros::Subscriber _subImu;                    ///< IMU message subscriber
+   //weitong
+   ros::Subscriber _subMapOrder;  //map order message subscriber
 };
 
 } // end namespace loam
