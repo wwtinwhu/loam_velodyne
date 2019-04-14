@@ -1,4 +1,4 @@
-# loam_velodyne
+# loam_velodyne(with global map saveing)
 
 ![Screenshot](/capture.bmp)
 Sample map built from [nsh_indoor_outdoor.bag](http://www.frc.ri.cmu.edu/~jizhang03/Datasets/nsh_indoor_outdoor.bag) (opened with [ccViewer](http://www.danielgm.net/cc/))
