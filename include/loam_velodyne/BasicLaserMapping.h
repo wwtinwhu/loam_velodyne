@@ -89,7 +89,8 @@ public:
    auto& laserCloudCornerLast() { return *_laserCloudCornerLast; }
    auto& laserCloudSurfLast() { return *_laserCloudSurfLast; }
    //weitong
-   auto& laserCLoudGlobalMap() {return *_laserCloudFullResGlobalMap;}
+   auto& laserCloudGlobalMap() {return *_laserCloudFullResGlobalMap;}
+   auto& laserCloudTrajectory() {return *_trajectoryAftMaptoInit;}
 
    void setScanPeriod(float val) { _scanPeriod = val; }
    void setMaxIterations(size_t val) { _maxIterations = val; }
@@ -186,6 +187,7 @@ private:
 
    //weitong
    pcl::PointCloud<pcl::PointXYZI>::Ptr _laserCloudFullResGlobalMap; //全局地图
+   pcl::PointCloud<pcl::PointXYZI>::Ptr _trajectoryAftMaptoInit; //aft_mapped_to_init的轨迹
 };
 
 } // end namespace loam

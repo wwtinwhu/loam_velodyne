@@ -232,8 +232,11 @@ void LaserMapping::imuHandler(const sensor_msgs::Imu::ConstPtr& imuIn)
 //weitong
 void LaserMapping::mapOrderHandler(const std_msgs::String::ConstPtr& order)
 {
-   ROS_INFO("copy that,save the global map");
-   pcl::io::savePCDFileASCII("/home/weitong/slam/globalmap.pcd",laserCLoudGlobalMap());
+   ROS_INFO("copy that,save the global map and trajectory");
+   pcl::io::savePCDFileASCII("/home/weitong/slam/globalmap.pcd",laserCloudGlobalMap());
+   laserCloudTrajectory().width = 1;
+   laserCloudTrajectory().height = laserCloudTrajectory().points.size();
+   pcl::io::savePCDFileASCII("/home/weitong/slam/trajectory.pcd",laserCloudTrajectory());
    ROS_INFO("done");
 }
 
@@ -294,7 +297,14 @@ void LaserMapping::publishResult()
    publishCloudMsg(_pubLaserCloudFullRes, laserCloud(), _timeLaserOdometry, "/camera_init");
 
    //weitong 全局地图叠加
-   laserCLoudGlobalMap() += laserCloud();
+   laserCloudGlobalMap() += laserCloud();
+
+   //weitong 轨迹点保存
+   pcl::PointXYZI trajectorypoint;
+   trajectorypoint.x = transformAftMapped().pos.x();
+   trajectorypoint.y = transformAftMapped().pos.y();
+   trajectorypoint.z = transformAftMapped().pos.z();
+   laserCloudTrajectory().points.push_back(trajectorypoint);
 
    // publish odometry after mapped transformations
    geometry_msgs::Quaternion geoQuat = tf::createQuaternionMsgFromRollPitchYaw

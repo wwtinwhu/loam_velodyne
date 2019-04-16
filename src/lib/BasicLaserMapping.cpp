@@ -76,7 +76,8 @@ BasicLaserMapping::BasicLaserMapping(const float& scanPeriod, const size_t& maxI
    _laserCloudCornerFromMap(new pcl::PointCloud<pcl::PointXYZI>()),
    _laserCloudSurfFromMap(new pcl::PointCloud<pcl::PointXYZI>()),
    //weitong
-   _laserCloudFullResGlobalMap(new pcl::PointCloud<pcl::PointXYZI>())
+   _laserCloudFullResGlobalMap(new pcl::PointCloud<pcl::PointXYZI>()),
+   _trajectoryAftMaptoInit(new pcl::PointCloud<pcl::PointXYZI>())
 {
    // initialize frame counter
    _frameCount = _stackFrameNum - 1;

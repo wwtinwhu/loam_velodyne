@@ -1,4 +1,4 @@
-# loam_velodyne(with global map saving)
+# loam_velodyne(with global map and trajectory saving)
 
 ![Screenshot](/capture.bmp)
 Sample map built from [nsh_indoor_outdoor.bag](http://www.frc.ri.cmu.edu/~jizhang03/Datasets/nsh_indoor_outdoor.bag) (opened with [ccViewer](http://www.danielgm.net/cc/))
@@ -36,7 +36,7 @@ roslaunch velodyne_pointcloud VLP16_points.launch pcap:="$HOME/Downloads/velodyn
 ```
 
 ## Save Global Map
-When the slam mission is done or the bag is played over, you can use following order to save the global map
+When the slam mission is done or the bag is played over, you can use following order to save the global map and trajectory(aft_mapped_to_init)
 ```
 rosbag play senMapOrder.bag --clock
 ```
