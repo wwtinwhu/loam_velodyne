@@ -233,10 +233,10 @@ void LaserMapping::imuHandler(const sensor_msgs::Imu::ConstPtr& imuIn)
 void LaserMapping::mapOrderHandler(const std_msgs::String::ConstPtr& order)
 {
    ROS_INFO("copy that,save the global map and trajectory");
-   pcl::io::savePCDFileASCII("/home/weitong/slam/globalmap.pcd",laserCloudGlobalMap());
+   pcl::io::savePCDFileBinaryCompressed("/home/weitong/slam/globalmap.pcd",laserCloudGlobalMap());
    laserCloudTrajectory().width = 1;
    laserCloudTrajectory().height = laserCloudTrajectory().points.size();
-   pcl::io::savePCDFileASCII("/home/weitong/slam/trajectory.pcd",laserCloudTrajectory());
+   pcl::io::savePCDFileBinaryCompressed("/home/weitong/slam/trajectory.pcd",laserCloudTrajectory());
    ROS_INFO("done");
 }
 
