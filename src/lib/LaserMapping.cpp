@@ -155,6 +155,7 @@ bool LaserMapping::setup(ros::NodeHandle& node, ros::NodeHandle& privateNode)
    _pubLaserCloudSurround = node.advertise<sensor_msgs::PointCloud2>("/laser_cloud_surround", 1);
    _pubLaserCloudFullRes  = node.advertise<sensor_msgs::PointCloud2>("/velodyne_cloud_registered", 2);
    _pubOdomAftMapped      = node.advertise<nav_msgs::Odometry>("/aft_mapped_to_init", 5);
+   _pubLaserAfterMappedPath = node.advertise<nav_msgs::Path>("/aft_mapped_path", 100);
 
    // subscribe to laser odometry topics
    _subLaserCloudCornerLast = node.subscribe<sensor_msgs::PointCloud2>
@@ -325,6 +326,14 @@ void LaserMapping::publishResult()
    _odomAftMapped.twist.twist.linear.y = transformBefMapped().pos.y();
    _odomAftMapped.twist.twist.linear.z = transformBefMapped().pos.z();
    _pubOdomAftMapped.publish(_odomAftMapped);
+
+    geometry_msgs::PoseStamped laserAfterMappedPose;
+    laserAfterMappedPose.header = _odomAftMapped.header;
+    laserAfterMappedPose.pose = _odomAftMapped.pose.pose;
+    laserAfterMappedPath.header.stamp = _odomAftMapped.header.stamp;
+    laserAfterMappedPath.header.frame_id = "/camera_init";
+    laserAfterMappedPath.poses.push_back(laserAfterMappedPose);
+    _pubLaserAfterMappedPath.publish(laserAfterMappedPath);
 
    _aftMappedTrans.stamp_ = _timeLaserOdometry;
    _aftMappedTrans.setRotation(tf::Quaternion(-geoQuat.y, -geoQuat.z, geoQuat.x, geoQuat.w));

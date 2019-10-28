@@ -39,6 +39,7 @@
 
 #include <ros/ros.h>
 #include <nav_msgs/Odometry.h>
+#include <nav_msgs/Path.h>
 #include <sensor_msgs/Imu.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <tf/transform_datatypes.h>
@@ -133,11 +134,13 @@ private:
 
 
    nav_msgs::Odometry _odomAftMapped;      ///< mapping odometry message
+   nav_msgs::Path laserAfterMappedPath;
    tf::StampedTransform _aftMappedTrans;   ///< mapping odometry transformation
 
    ros::Publisher _pubLaserCloudSurround;    ///< map cloud message publisher
    ros::Publisher _pubLaserCloudFullRes;     ///< current full resolution cloud message publisher
    ros::Publisher _pubOdomAftMapped;         ///< mapping odometry publisher
+   ros::Publisher _pubLaserAfterMappedPath;
    tf::TransformBroadcaster _tfBroadcaster;  ///< mapping odometry transform broadcaster
 
    ros::Subscriber _subLaserCloudCornerLast;   ///< last corner cloud message subscriber
