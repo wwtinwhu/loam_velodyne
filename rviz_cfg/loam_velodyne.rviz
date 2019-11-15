@@ -9,7 +9,6 @@ Panels:
         - /odometry1/odomPath1
         - /odometry1/PointCloud21
         - /mapping1
-        - /mapping1/currPoints1
       Splitter Ratio: 0.5
     Tree Height: 531
   - Class: rviz/Selection
@@ -237,7 +236,7 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 15
@@ -254,7 +253,7 @@ Visualization Manager:
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -297,7 +296,7 @@ Visualization Manager:
           Color: 255; 0; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 63.03843307495117
@@ -309,12 +308,12 @@ Visualization Manager:
           Selectable: true
           Size (Pixels): 3
           Size (m): 0.20000000298023224
-          Style: Flat Squares
-          Topic: /mapping_corner
+          Style: Points
+          Topic: /laser_cloud_sharp
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -327,7 +326,7 @@ Visualization Manager:
           Color: 255; 0; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 63.0818977355957
@@ -339,12 +338,12 @@ Visualization Manager:
           Selectable: true
           Size (Pixels): 3
           Size (m): 0.20000000298023224
-          Style: Flat Squares
-          Topic: /mapping_surf
+          Style: Points
+          Topic: /laser_cloud_flat
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -698,7 +697,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 24.49471664428711
+      Distance: 43.16805648803711
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -713,10 +712,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.3547964096069336
+      Pitch: 0.7397964000701904
       Target Frame: body
       Value: XYOrbit (rviz)
-      Yaw: 4.253172397613525
+      Yaw: 4.688171863555908
     Saved: ~
 Window Geometry:
   Displays:

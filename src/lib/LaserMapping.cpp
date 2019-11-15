@@ -234,7 +234,7 @@ void LaserMapping::imuHandler(const sensor_msgs::Imu::ConstPtr& imuIn)
 void LaserMapping::mapOrderHandler(const std_msgs::String::ConstPtr& order)
 {
    ROS_INFO("copy that,save the global map and trajectory");
-   pcl::io::savePCDFileBinaryCompressed("/home/weitongwu/slam/globalmap.pcd",laserCloudGlobalMap());
+   pcl::io::savePCDFileBinaryCompressed("/home/weitongwu/slam/globalmap_loam.pcd",laserCloudGlobalMap());
    laserCloudTrajectory().width = 1;
    laserCloudTrajectory().height = laserCloudTrajectory().points.size();
    pcl::io::savePCDFileBinaryCompressed("/home/weitongwu/slam/trajectory.pcd",laserCloudTrajectory());
