@@ -298,13 +298,23 @@ void LaserMapping::publishResult()
    publishCloudMsg(_pubLaserCloudFullRes, laserCloud(), _timeLaserOdometry, "/camera_init");
 
    //weitong 全局地图叠加
-   laserCloudGlobalMap() += laserCloud();
+   pcl::PointCloud<pcl::PointXYZI>::Ptr laserCloud_zUp(new pcl::PointCloud<pcl::PointXYZI>());
+   *laserCloud_zUp = laserCloud();
+    for (int j = 0; j < laserCloud_zUp->points.size() ; ++j) {
+        pcl::PointXYZI pt;
+        pt.x = laserCloud_zUp->points[j].z;
+        pt.y = laserCloud_zUp->points[j].x;
+        pt.z = laserCloud_zUp->points[j].y;
+        pt.intensity = laserCloud_zUp->points[j].intensity;
+        laserCloud_zUp->points[j] = pt;
+    }
+   laserCloudGlobalMap() += *laserCloud_zUp;
 
    //weitong 轨迹点保存
    pcl::PointXYZI trajectorypoint;
-   trajectorypoint.x = transformAftMapped().pos.x();
-   trajectorypoint.y = transformAftMapped().pos.y();
-   trajectorypoint.z = transformAftMapped().pos.z();
+   trajectorypoint.x = transformAftMapped().pos.z();
+   trajectorypoint.y = transformAftMapped().pos.x();
+   trajectorypoint.z = transformAftMapped().pos.y();
    laserCloudTrajectory().points.push_back(trajectorypoint);
 
    // publish odometry after mapped transformations
